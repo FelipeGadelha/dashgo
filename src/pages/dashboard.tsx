@@ -71,7 +71,7 @@ export function Dashborad(){
             pb="4"
           >
             <Text fontSize="lg" mb="4">Inscritos da semana</Text>
-            <Chart option={options} series={series} type="area" height={160}/>
+            {/* <Chart type="area" option={options} series={series} height={160}/> */}
           </Box>
           <Box
             p="8"
@@ -80,7 +80,7 @@ export function Dashborad(){
             pb="4"
           >
             <Text fontSize="lg" mb="4">Taxa de abertura</Text>
-            <Chart option={options} series={series} type="area" height={160}/>
+            {/* <Chart type="area" option={options} series={series} height={160}/> */}
           </Box>
         </SimpleGrid>
       </Flex>
