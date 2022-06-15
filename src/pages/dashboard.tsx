@@ -2,6 +2,7 @@ import { Box, Flex, SimpleGrid, Text, theme } from "@chakra-ui/react"
 import dynamic from "next/dynamic"
 import { Header } from "../components/Header"
 import { Sidebar } from "../components/Sidebar"
+
 const Chart = dynamic(() => import('react-apexcharts'), {
   ssr: false
 })
@@ -16,6 +17,9 @@ const options = {
     },
     foreColor: theme.colors.gray[500]
   },
+  legend: {
+    show: true
+  },
   grid: {
     show: false,
   },
@@ -26,7 +30,7 @@ const options = {
     enabled: false,
   },
   xaxis: {
-    type: 'datetime',
+    type: "datetime",
     axisBorder: {
       color: theme.colors.gray[600]
     },
@@ -65,22 +69,22 @@ export function Dashborad(){
         <Sidebar/>
         <SimpleGrid flex="1" gap="4" minChildWidth="320px" alignItems="flex-start">
           <Box
-            p="8"
+            p={["6", "8"]}
             bg="gray.800"
             borderRadius={8}
             pb="4"
           >
             <Text fontSize="lg" mb="4">Inscritos da semana</Text>
-            {/* <Chart type="area" option={options} series={series} height={160}/> */}
+            <Chart type="area" options={ options } series={ series } height={160}/>
           </Box>
           <Box
-            p="8"
+            p={["6", "8"]}
             bg="gray.800"
             borderRadius={8}
             pb="4"
           >
             <Text fontSize="lg" mb="4">Taxa de abertura</Text>
-            {/* <Chart type="area" option={options} series={series} height={160}/> */}
+            <Chart type="area" options={ options } series={ series } height={160}/>
           </Box>
         </SimpleGrid>
       </Flex>
