@@ -13,20 +13,15 @@ export async function getUsers(page: number): Promise<GetUsersResponse> {
       page,
     }
   })
-
   const totalCount = Number(headers['x-total-count'])
-
   const users =  data.users.map(user => {
-    return {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      createdAt: new Date(user.createdAt).toLocaleDateString('pt-BR', {
-        day: '2-digit',
-        month: 'long',
-        year: 'numeric'
-      })
-    }
+
+    return new User(
+      user.id,
+      user.name,
+      user.email,
+      user.createdAt
+    )
   })
   return {users, totalCount}
 }

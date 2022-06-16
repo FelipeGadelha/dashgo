@@ -1,4 +1,11 @@
-import { createServer, Model, Factory, Response } from 'miragejs'
+import {
+  createServer,
+  Model,
+  Factory,
+  Server,
+  Response,
+  // ActiveModelSerializer
+} from 'miragejs'
 import { faker } from '@faker-js/faker'
 
 type User = {
@@ -8,10 +15,15 @@ type User = {
 }
 
 export function makeServer() {
-  const server = createServer({
+  const server = new Server({
+    // serializers: {
+    //   application: ActiveModelSerializer,
+    // },
+
     models: {
       user: Model.extend<Partial<User>>({})
     },
+
     factories: {
       user: Factory.extend({
         name(i: number) {
@@ -21,19 +33,21 @@ export function makeServer() {
           return faker.internet.email().toLowerCase()
         },
         createdAt() {
-          return faker.date.recent(10);
+          return faker.date.recent(10)
         }
       })
     },
-    seeds(server) {
-      server.createList('user', 200)
+
+    seeds(server: Server) {
+      server.createList('user', 196)
     },
+
     routes() {
       this.namespace = 'api'
       this.timing = 750
 
       this.get('/users', function (schema, request) {
-        const { page = 1, per_page = 10} = request.params
+        const { page = 1, per_page = 10} = request.queryParams
 
         const total = schema.all('user').length
 
@@ -42,12 +56,19 @@ export function makeServer() {
 
         const users = this.serialize(schema.all('user'))
           .users.slice(pageStart, pageEnd)
+
+        // let page = request.queryParams.page
+        // let offset = page - 1
+        // let begin = 0 + (10 * offset)
+        // const users = this.serialize(schema.all('user'))
+        //   .users.slice(begin, begin + 10)
         return new Response(
           200,
-          {'x-total-count': String(total)},
+          { 'x-total-count': String(total) },
           { users }
         )
-      })
+
+      });
       this.post('/users')
 
       this.namespace = ''
