@@ -13,9 +13,9 @@ export function SearchBox() {
     <Flex
       as="label"
       flex="1"
-      py="2"
-      px="8"
-      ml="6"
+      py='4'
+      px='8'
+      ml='6'
       maxWidth={400}
       alignSelf="center"
       color="gray.200"
