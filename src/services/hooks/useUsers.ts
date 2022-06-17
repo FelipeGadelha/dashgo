@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query'
+import { useQuery, UseQueryOptions } from 'react-query'
 import { User } from '../../types/User'
 import { api } from '../api'
 
@@ -26,9 +26,11 @@ export async function getUsers(page: number): Promise<GetUsersResponse> {
   return {users, totalCount}
 }
 
-export function useUsers(page: number) {
+// export function useUsers(page: number, options: UseQueryOptions) {
+  export function useUsers(page: number) {
   return useQuery(['users', page], () => getUsers(page), {
     staleTime: 1000 * 5, // 5 segundos
     // staleTime: 1000 * 60 * 10, // 10 minutos
+    // ...options
   })
 }

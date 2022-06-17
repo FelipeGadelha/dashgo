@@ -1,7 +1,7 @@
 import { Box, Flex, SimpleGrid, Text, theme } from "@chakra-ui/react"
 import dynamic from "next/dynamic"
-import { Header } from "../components/Header"
-import { Sidebar } from "../components/Sidebar"
+import { Header } from "../../components/Header"
+import { Sidebar } from "../../components/Sidebar"
 
 const Chart = dynamic(() => import('react-apexcharts'), {
   ssr: false,
@@ -30,14 +30,22 @@ const options = {
     enabled: false,
   },
   xaxis: {
-    // type: "datetime",
+    // type: 'datetime',
     axisBorder: {
       color: theme.colors.gray[600]
     },
     axisTicks: {
       color: theme.colors.gray[600]
     },
-    categories: [
+  },
+  labels: [
+      // new Date('2021-01-18T00:00:00:00.000Z'),
+      // new Date('2021-02-19T00:00:00:00.000Z'),
+      // new Date('2021-05-20T00:00:00:00.000Z'),
+      // new Date('2021-06-21T00:00:00:00.000Z'),
+      // new Date('2021-07-22T00:00:00:00.000Z'),
+      // new Date('2021-04-23T00:00:00:00.000Z'),
+      // new Date('2021-08-24T00:00:00:00.000Z'),
       '2021-03-18T00:00:00:00.000Z',
       '2021-03-19T00:00:00:00.000Z',
       '2021-03-20T00:00:00:00.000Z',
@@ -53,7 +61,12 @@ const options = {
       // '2021-03-23',
       // '2021-03-24',
     ]
-  },
+    // .map( date => {
+    //   return new Date(date).toLocaleDateString('pt-BR', {
+    //   day: '2-digit',
+    //   month: 'long',
+    // })})
+  ,
   fill: {
     opacity: 0.3,
     type: 'gradient',
